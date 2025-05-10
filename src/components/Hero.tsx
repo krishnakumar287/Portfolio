@@ -1,15 +1,19 @@
 import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowDown, ExternalLink } from 'lucide-react';
+import { useInView } from 'react-intersection-observer';
 import gsap from 'gsap';
 import Button from './Button';
 import AnimatedText from './AnimatedText';
 import heroImage from './hero.jpg';
 
-
 const Hero: React.FC = () => {
   const heroRef = useRef<HTMLDivElement>(null);
   const circleRef = useRef<HTMLDivElement>(null);
+  const { ref, inView } = useInView({
+    threshold: 0.1,
+    triggerOnce: true
+  });
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -29,17 +33,29 @@ const Hero: React.FC = () => {
       });
     };
 
+    const updateHeroHeight = () => {
+      if (heroRef.current) {
+        const vh = window.innerHeight * 0.01;
+        document.documentElement.style.setProperty('--vh', `${vh}px`);
+      }
+    };
+
     window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('resize', updateHeroHeight);
+    window.addEventListener('orientationchange', updateHeroHeight);
+    updateHeroHeight();
 
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('resize', updateHeroHeight);
+      window.removeEventListener('orientationchange', updateHeroHeight);
     };
   }, []);
 
   return (
     <section
       id="home"
-      className="min-h-screen flex items-center justify-center relative overflow-hidden section-padding"
+      className="hero-section relative overflow-hidden section-padding"
       ref={heroRef}
     >
       {/* Background elements */}
@@ -54,7 +70,7 @@ const Hero: React.FC = () => {
       <div className="container mx-auto z-10">
         <div className="flex flex-col md:flex-row items-center justify-between gap-12">
           <motion.div
-            className="md:w-1/2"
+            className="md:w-1/2 text-center md:text-left"
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -71,17 +87,17 @@ const Hero: React.FC = () => {
             <h1 className="text-4xl md:text-6xl font-heading font-bold mb-6">
               <AnimatedText
                 text="Krishna"
-                className="heading text-5xl md:text-7xl mb-2"
+                className="heading text-4xl sm:text-5xl md:text-7xl mb-2"
               />
               <AnimatedText
                 text="Creative Developer"
-                className="text-3xl md:text-5xl text-text/80"
+                className="text-2xl sm:text-3xl md:text-5xl text-text/80"
                 once
               />
             </h1>
 
             <motion.p
-              className="text-text/70 text-lg mb-8 max-w-lg"
+              className="text-text/70 text-base sm:text-lg mb-8 max-w-lg mx-auto md:mx-0"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.6 }}
@@ -91,7 +107,7 @@ const Hero: React.FC = () => {
             </motion.p>
 
             <motion.div
-              className="flex flex-wrap gap-4"
+              className="flex flex-wrap gap-4 justify-center md:justify-start"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.8 }}
@@ -110,13 +126,13 @@ const Hero: React.FC = () => {
           </motion.div>
 
           <motion.div
-            className="md:w-1/2 flex justify-center"
+            className="md:w-1/2 flex justify-center mt-8 md:mt-0"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
             <div className="relative">
-              <div className="w-64 h-64 md:w-80 md:h-80 rounded-full bg-gradient-to-r from-primary to-accent p-1">
+              <div className="w-60 h-60 sm:w-64 sm:h-64 md:w-80 md:h-80 rounded-full bg-gradient-to-r from-primary to-accent p-1">
                 <div className="w-full h-full rounded-full overflow-hidden bg-background-dark">
                   <img
                     src={heroImage}

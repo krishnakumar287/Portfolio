@@ -59,21 +59,21 @@ const About: React.FC = () => {
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.4 }}
           >
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mb-6 sm:mb-8">
               {stats.map((stat, index) => (
                 <motion.div
                   key={index}
-                  className="glass-card p-6 text-center"
+                  className="glass-card p-4 sm:p-6 text-center"
                   initial={{ opacity: 0, y: 20 }}
                   animate={inView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.4, delay: 0.6 + index * 0.1 }}
                   whileHover={{ y: -5, transition: { duration: 0.2 } }}
                 >
-                  <div className="flex justify-center mb-3 text-primary">
+                  <div className="flex justify-center mb-2 sm:mb-3 text-primary">
                     {stat.icon}
                   </div>
-                  <h3 className="text-2xl font-bold text-primary mb-1">{stat.value}</h3>
-                  <p className="text-text/70 text-sm">{stat.label}</p>
+                  <h3 className="text-xl sm:text-2xl font-bold text-primary mb-1">{stat.value}</h3>
+                  <p className="text-text/70 text-xs sm:text-sm">{stat.label}</p>
                 </motion.div>
               ))}
             </div>

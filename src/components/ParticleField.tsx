@@ -28,7 +28,12 @@ const ParticleField: React.FC = () => {
 
     const createParticles = () => {
       particles.current = [];
-      const particleCount = Math.min(window.innerWidth * 0.1, 100);
+      
+      // Reduce particle count on mobile devices
+      const isMobile = window.innerWidth < 768;
+      const particleCount = isMobile 
+        ? Math.min(window.innerWidth * 0.05, 40) // Fewer particles on mobile
+        : Math.min(window.innerWidth * 0.1, 100); // Normal count on desktop
       
       for (let i = 0; i < particleCount; i++) {
         particles.current.push({
@@ -36,7 +41,7 @@ const ParticleField: React.FC = () => {
           y: Math.random() * canvas.height,
           vx: (Math.random() - 0.5) * 0.5,
           vy: (Math.random() - 0.5) * 0.5,
-          size: Math.random() * 3 + 1,
+          size: Math.random() * (isMobile ? 2 : 3) + 1, // Smaller particles on mobile
           color: `hsla(${Math.random() * 60 + 200}, 70%, 60%, ${Math.random() * 0.4 + 0.1})`
         });
       }

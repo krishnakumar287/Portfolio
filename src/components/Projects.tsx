@@ -88,7 +88,7 @@ const Projects: React.FC = () => {
 
         {/* Category Filter Buttons */}
         <motion.div 
-          className="flex flex-wrap justify-center gap-4 mb-12"
+          className="flex flex-wrap justify-center gap-2 sm:gap-4 mb-8 sm:mb-12"
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.2, ease: "easeInOut" }}
@@ -96,7 +96,9 @@ const Projects: React.FC = () => {
           {categories.map((category, index) => (
             <motion.button
               key={index}
-              className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${filter === category ? 'bg-primary text-white' : 'bg-white/5 text-text/70 hover:bg-white/10'}`}
+              className={`px-3 py-1 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm font-medium transition-all ${
+                filter === category ? 'bg-primary text-white' : 'bg-white/5 text-text/70 hover:bg-white/10'
+              }`}
               onClick={() => setFilter(category)}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
@@ -111,7 +113,7 @@ const Projects: React.FC = () => {
         <AnimatePresence mode="wait">
           <motion.div 
             key={filter}
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}

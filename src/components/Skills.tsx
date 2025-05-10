@@ -131,7 +131,7 @@ const Skills: React.FC = () => {
             variants={container}
             initial="hidden"
             animate={inView ? "show" : "hidden"}
-            className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-8"
+            className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-6 gap-6 sm:gap-8"
           >
             {frontendSkills.map((skill, index) => (
               <motion.div
@@ -141,7 +141,7 @@ const Skills: React.FC = () => {
                 className="flex flex-col items-center"
               >
                 <motion.div 
-                  className="w-20 h-20 rounded-full glass-card flex items-center justify-center mb-4"
+                  className="w-16 h-16 sm:w-20 sm:h-20 rounded-full glass-card flex items-center justify-center mb-4"
                   style={{ 
                     background: `radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 70%)`,
                     boxShadow: `0 0 20px rgba(${skill.color}, 0.3)` 
@@ -152,7 +152,7 @@ const Skills: React.FC = () => {
                     {skill.icon}
                   </div>
                 </motion.div>
-                <p className="font-medium text-center">{skill.name}</p>
+                <p className="font-medium text-center text-sm sm:text-base">{skill.name}</p>
               </motion.div>
             ))}
           </motion.div>
@@ -173,7 +173,7 @@ const Skills: React.FC = () => {
             variants={container}
             initial="hidden"
             animate={inView ? "show" : "hidden"}
-            className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-8"
+            className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8"
           >
             {backendSkills.map((skill, index) => (
               <motion.div
@@ -215,7 +215,7 @@ const Skills: React.FC = () => {
             variants={container}
             initial="hidden"
             animate={inView ? "show" : "hidden"}
-            className="grid grid-cols-3 gap-8"
+            className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8"
           >
             {otherSkills.map((skill, index) => (
               <motion.div
